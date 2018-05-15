@@ -1,0 +1,16 @@
+C:\Users\Pedro\Desktop\IM\IM_Work01\SuperAdventureIM\gestureModality\gestureModality\bin\Debug\gestureModality.exe.config
+C:\Users\Pedro\Desktop\IM\IM_Work01\SuperAdventureIM\gestureModality\gestureModality\bin\Debug\gestureModality.exe
+C:\Users\Pedro\Desktop\IM\IM_Work01\SuperAdventureIM\gestureModality\gestureModality\bin\Debug\gestureModality.pdb
+C:\Users\Pedro\Desktop\IM\IM_Work01\SuperAdventureIM\gestureModality\gestureModality\bin\Debug\Microsoft.Kinect.dll
+C:\Users\Pedro\Desktop\IM\IM_Work01\SuperAdventureIM\gestureModality\gestureModality\bin\Debug\Microsoft.Kinect.xml
+C:\Users\Pedro\Desktop\IM\IM_Work01\SuperAdventureIM\gestureModality\gestureModality\obj\Debug\gestureModality.csprojResolveAssemblyReference.cache
+C:\Users\Pedro\Desktop\IM\IM_Work01\SuperAdventureIM\gestureModality\gestureModality\obj\Debug\MainWindow.g.cs
+C:\Users\Pedro\Desktop\IM\IM_Work01\SuperAdventureIM\gestureModality\gestureModality\obj\Debug\App.g.cs
+C:\Users\Pedro\Desktop\IM\IM_Work01\SuperAdventureIM\gestureModality\gestureModality\obj\Debug\gestureModality_MarkupCompile.cache
+C:\Users\Pedro\Desktop\IM\IM_Work01\SuperAdventureIM\gestureModality\gestureModality\obj\Debug\gestureModality_MarkupCompile.lref
+C:\Users\Pedro\Desktop\IM\IM_Work01\SuperAdventureIM\gestureModality\gestureModality\obj\Debug\MainWindow.baml
+C:\Users\Pedro\Desktop\IM\IM_Work01\SuperAdventureIM\gestureModality\gestureModality\obj\Debug\gestureModality.g.resources
+C:\Users\Pedro\Desktop\IM\IM_Work01\SuperAdventureIM\gestureModality\gestureModality\obj\Debug\gestureModality.Properties.Resources.resources
+C:\Users\Pedro\Desktop\IM\IM_Work01\SuperAdventureIM\gestureModality\gestureModality\obj\Debug\gestureModality.csproj.GenerateResource.Cache
+C:\Users\Pedro\Desktop\IM\IM_Work01\SuperAdventureIM\gestureModality\gestureModality\obj\Debug\gestureModality.exe
+C:\Users\Pedro\Desktop\IM\IM_Work01\SuperAdventureIM\gestureModality\gestureModality\obj\Debug\gestureModality.pdb
