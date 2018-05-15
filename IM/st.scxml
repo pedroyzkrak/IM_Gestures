@@ -17,7 +17,7 @@
 		<data name="Action" />
 		<data name="currAction" />
 		<data name="KINECT" />
-		<data name="ASR" /> 
+		<data name="GESTURES" /> 
 		<data name="TTS" /> 
 		<data name="GUI" /> 
 		<data name="JSONDATA" /> 
@@ -45,8 +45,8 @@
 					<commons:var name="newContextResponse" expr="${mmi:newContextResponse(contextId, source, sourceMC, requestId)}" />
 					<send event="mmi:newContextResponse" target="${sourceMC}" targettype="MC" namelist="newContextResponse" />
 
-					<if cond="${_eventdata.sourceMC eq 'ASR'}">
-						<assign name="ASR" expr="true" />
+					<if cond="${_eventdata.sourceMC eq 'GESTURES'}">
+						<assign name="GESTURES" expr="true" />
 					</if>
 					
 					<if cond="${_eventdata.sourceMC eq 'KINECT'}">
