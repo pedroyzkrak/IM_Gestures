@@ -17,8 +17,7 @@ namespace gestureModality
         {
             this.kinect = KinectSensor.GetDefault();
             this.kinect.IsAvailableChanged += this.Sensor_IsAvailableChanged;
-            this.StatusText = this.kinect.IsAvailable ? "Hello World! Kinect is Ready!" :
- "Goodbye World! Kinect is Unavailable!";
+            this.StatusText = this.kinect.IsAvailable ? "Hello World! Kinect is Ready!" : "Goodbye World! Kinect is Unavailable!";
             this.DataContext = this;
             InitializeComponent();
             this.kinect.Open();
@@ -26,8 +25,7 @@ namespace gestureModality
         public event PropertyChangedEventHandler PropertyChanged;
         private void Sensor_IsAvailableChanged(object sender, IsAvailableChangedEventArgs e)
         {
-            this.StatusText = this.kinect.IsAvailable ? "Hello World! Kinect is Ready!" :
-           "Goodbye World! Kinect is Unavailable!";
+            this.StatusText = this.kinect.IsAvailable ? "Hello World! Kinect is Ready!" : "Goodbye World! Kinect is Unavailable!";
         }
         public string StatusText
         {
