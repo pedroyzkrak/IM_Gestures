@@ -14,3 +14,6 @@ C:\Users\Pedro\Desktop\IM\IM_Work01\SuperAdventureIM\gestureModality\gestureModa
 C:\Users\Pedro\Desktop\IM\IM_Work01\SuperAdventureIM\gestureModality\gestureModality\obj\Debug\gestureModality.csproj.GenerateResource.Cache
 C:\Users\Pedro\Desktop\IM\IM_Work01\SuperAdventureIM\gestureModality\gestureModality\obj\Debug\gestureModality.exe
 C:\Users\Pedro\Desktop\IM\IM_Work01\SuperAdventureIM\gestureModality\gestureModality\obj\Debug\gestureModality.pdb
+C:\Users\Pedro\Desktop\IM\IM_Gestures\gestureModality\gestureModality\bin\Debug\gestureModality.exe.config
+C:\Users\Pedro\Desktop\IM\IM_Gestures\gestureModality\gestureModality\obj\Debug\gestureModality.exe
+C:\Users\Pedro\Desktop\IM\IM_Gestures\gestureModality\gestureModality\obj\Debug\gestureModality.pdb
