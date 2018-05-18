@@ -3,6 +3,7 @@ using Microsoft.Kinect;
 using System.ComponentModel;
 using Microsoft.Kinect.VisualGestureBuilder;
 using System;
+using System.Reflection;
 
 namespace gestureModality
 {
@@ -66,10 +67,11 @@ namespace gestureModality
             this.kinect.IsAvailableChanged += this.Sensor_IsAvailableChanged;
             this.StatusText = this.kinect.IsAvailable ? "The Kinect is availabe." : "Kinect is Unavailable!";
             this.DataContext = this;
+
             _gm = new GestureMod();
             bodyFrameReader = kinect.BodyFrameSource.OpenReader();
             bodyFrameReader.FrameArrived += bodyFrameArrived;
-            vgbDb = new VisualGestureBuilderDatabase(@"..\Gestures\Gesture.gbd");
+            vgbDb = new VisualGestureBuilderDatabase(@"..\..\Gestures\IM_Gestures.gbd");
             vgbFrameSource = new VisualGestureBuilderFrameSource(KinectSensor.GetDefault(), 0);
             foreach (var g in vgbDb.AvailableGestures)
             {
