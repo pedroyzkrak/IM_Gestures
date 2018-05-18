@@ -6,3 +6,4 @@ gestureModality/.vs/gestureModality/v14/.suo
 gestureModality/gestureModality/obj/Debug
 gestureModality/gestureModality/bin/Debug
 gestureModality/gestureModality/gestureModality.csproj
+*.csproj
