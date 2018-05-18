@@ -71,12 +71,10 @@ namespace gestureModality
             _gm = new GestureMod();
             bodyFrameReader = kinect.BodyFrameSource.OpenReader();
             bodyFrameReader.FrameArrived += bodyFrameArrived;
+            bodyFrameReader.IsPaused = false;
             vgbDb = new VisualGestureBuilderDatabase(@"..\..\Gestures\IM_Gestures.gbd");
             vgbFrameSource = new VisualGestureBuilderFrameSource(KinectSensor.GetDefault(), 0);
-            foreach (var g in vgbDb.AvailableGestures)
-            {
-                vgbFrameSource.AddGesture(g);
-            }
+            vgbFrameSource.AddGestures(vgbDb.AvailableGestures);
             vgbFrameReader = vgbFrameSource.OpenReader();
             vgbFrameReader.FrameArrived += vgbFrameArrived;
             kinect.Open();
