@@ -6,7 +6,7 @@
      xmlns:local="clr-namespace:gestureModality"
      mc:Ignorable="d"
      Title="MainWindow" Height="350" Width="525"
-     Closing="MainWindow_Closing">
+     Closing="MainWindow_Closing" Loaded="Window_Loaded">
     <Grid>
         <TextBlock x:Name="textBlock" Text="{Binding StatusText}" HorizontalAlignment="Left" Margin="100,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36"/>
     </Grid>
