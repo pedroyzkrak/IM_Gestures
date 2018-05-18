@@ -3,7 +3,6 @@ using Microsoft.Kinect;
 using System.ComponentModel;
 using Microsoft.Kinect.VisualGestureBuilder;
 using System;
-using System.Reflection;
 
 namespace gestureModality
 {
@@ -72,9 +71,12 @@ namespace gestureModality
             bodyFrameReader = kinect.BodyFrameSource.OpenReader();
             bodyFrameReader.FrameArrived += bodyFrameArrived;
             bodyFrameReader.IsPaused = false;
-            vgbDb = new VisualGestureBuilderDatabase(@"..\..\Gestures\IM_Gestures.gbd");
+            vgbDb = new VisualGestureBuilderDatabase(@"Gestures\IM_Gestures.gbd");
             vgbFrameSource = new VisualGestureBuilderFrameSource(KinectSensor.GetDefault(), 0);
-            vgbFrameSource.AddGestures(vgbDb.AvailableGestures);
+            foreach (var g in vgbDb.AvailableGestures)
+            {
+                vgbFrameSource.AddGesture(g);
+            }
             vgbFrameReader = vgbFrameSource.OpenReader();
             vgbFrameReader.FrameArrived += vgbFrameArrived;
             kinect.Open();
