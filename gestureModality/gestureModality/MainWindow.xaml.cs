@@ -309,21 +309,25 @@ namespace gestureModality
                         }
                     }
                 }
-                else if(vgbFrame.DiscreteGestureResults==null)
+                else if(vgbFrame!=null)
                 {
-                    Console.WriteLine("resultado null");
-                    if (stopwatch.IsRunning)
+                    if(vgbFrame.DiscreteGestureResults.Count==0)
                     {
-                        if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds))
+                        Console.WriteLine("resultado null");
+                        if (stopwatch.IsRunning)
+                        {
+                            if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds))
+                            {
+                                current_gesture = "";
+                                stopwatch.Stop();
+                            }
+                        }
+                        else
                         {
                             current_gesture = "";
-                            stopwatch.Stop();
                         }
                     }
-                    else
-                    {
-                        current_gesture = "";
-                    }
+
                 }
             }
         }
