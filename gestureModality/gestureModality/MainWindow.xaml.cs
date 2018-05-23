@@ -305,24 +305,24 @@ namespace gestureModality
                                             break;
                                     }
                                 }
-                                else if(result==null)
-                                {
-                                    Console.WriteLine("resultado null");
-                                    if (stopwatch.IsRunning)
-                                    {
-                                        if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds))
-                                        {
-                                            current_gesture = "";
-                                            stopwatch.Stop();
-                                        }
-                                    }
-                                    else
-                                    {
-                                        current_gesture = "";
-                                    }
-                                }
                             }
                         }
+                    }
+                }
+                else if(vgbFrame.DiscreteGestureResults==null)
+                {
+                    Console.WriteLine("resultado null");
+                    if (stopwatch.IsRunning)
+                    {
+                        if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds))
+                        {
+                            current_gesture = "";
+                            stopwatch.Stop();
+                        }
+                    }
+                    else
+                    {
+                        current_gesture = "";
                     }
                 }
             }
