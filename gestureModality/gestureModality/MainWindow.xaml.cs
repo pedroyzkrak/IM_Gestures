@@ -207,6 +207,32 @@ namespace gestureModality
                                                 current_gesture = g.Name;
                                             }
                                             break;
+                                        case "mapa_aberto":
+                                            if (current_gesture == "mapa_fechado" && notXSecondsPassed(time, DateTime.Now.Second))
+                                            {
+                                                Console.WriteLine("Abrir mapa");
+                                                time = -1;
+
+                                            }
+                                            else if (!notXSecondsPassed(time, DateTime.Now.Second) || time == -1 || current_gesture!="mapa_fechado")
+                                            {
+                                                time = DateTime.Now.Second;
+                                                current_gesture = g.Name;
+                                            }
+                                            break;
+                                        case "mapa_fechado":
+                                            if (current_gesture == "mapa_aberto" && notXSecondsPassed(time, DateTime.Now.Second))
+                                            {
+                                                Console.WriteLine("Fechar Mapa");
+                                                time = -1;
+
+                                            }
+                                            else if (!notXSecondsPassed(time, DateTime.Now.Second) || time == -1 || current_gesture != "mapa_aberto")
+                                            {
+                                                time = DateTime.Now.Second;
+                                                current_gesture = g.Name;
+                                            }
+                                            break;
                                     }
                                 }
                             }
