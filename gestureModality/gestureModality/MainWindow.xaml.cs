@@ -3,6 +3,8 @@ using Microsoft.Kinect;
 using System.ComponentModel;
 using Microsoft.Kinect.VisualGestureBuilder;
 using System;
+using System.Timers;
+using System.Threading.Tasks;
 
 namespace gestureModality
 {
@@ -11,7 +13,8 @@ namespace gestureModality
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-
+        private string current_gesture = "";
+        private int time = -1;
         private KinectSensor kinect = null;
 
         private string statusText = null;
@@ -123,8 +126,16 @@ namespace gestureModality
             }
         }
 
+        private bool notTwoSecondsPassed(int time1, int time2)
+        {
+            if (time2 - time1 <= 2)
+                return true;
+            return false;
+        }
+
         private void vgbFrameArrived(object sender, VisualGestureBuilderFrameArrivedEventArgs e)
         {
+            
             using (var vgbFrame = e.FrameReference.AcquireFrame())
             {
                 if (vgbFrame != null && vgbFrame.DiscreteGestureResults != null)
@@ -139,9 +150,64 @@ namespace gestureModality
                                 DiscreteGestureResult result = null;
                                 discreteResults.TryGetValue(g, out result);
 
-                                if (result != null)
+                                if (result != null && result.Confidence>0.5)
                                 {
-                                    Console.WriteLine(g.Name + " " + result.Confidence + "\n");
+                                    switch(g.Name)
+                                    {
+                                        case "ir_direita_hands_Right":
+                                            if (current_gesture == "ir_esquerda_hands_Right" && notTwoSecondsPassed(time,DateTime.Now.Second))
+                                            {
+                                                Console.WriteLine("vai pra direita");
+                                                time = -1;
+                                                
+                                            }
+                                            else if(!notTwoSecondsPassed(time, DateTime.Now.Second) || time == -1)
+                                            {
+                                                time = DateTime.Now.Second;
+                                                current_gesture = g.Name;
+                                            }
+                                            break;
+                                        case "ir_esquerda_hands_Right":
+                                            if (current_gesture == "ir_direita_hands_Right" && notTwoSecondsPassed(time, DateTime.Now.Second))
+                                            {
+                                                Console.WriteLine("vai pra esquerda");
+                                                time = -1;
+
+                                            }
+                                            else if (!notTwoSecondsPassed(time, DateTime.Now.Second) || time == -1)
+                                            {
+                                                time = DateTime.Now.Second;
+                                                current_gesture = g.Name;
+                                            }
+                                            break;
+
+                                        case "ir_cima":
+                                            if (current_gesture == "ir_baixo" && notTwoSecondsPassed(time, DateTime.Now.Second))
+                                            {
+                                                Console.WriteLine("Ir pra cima");
+                                                time = -1;
+
+                                            }
+                                            else if (!notTwoSecondsPassed(time, DateTime.Now.Second) || time == -1)
+                                            {
+                                                time = DateTime.Now.Second;
+                                                current_gesture = g.Name;
+                                            }
+                                            break;
+                                        case "ir_baixo":
+                                            if (current_gesture == "ir_cima" && notTwoSecondsPassed(time, DateTime.Now.Second))
+                                            {
+                                                Console.WriteLine("Ir pra baixo");
+                                                time = -1;
+
+                                            }
+                                            else if (!notTwoSecondsPassed(time, DateTime.Now.Second) || time == -1)
+                                            {
+                                                time = DateTime.Now.Second;
+                                                current_gesture = g.Name;
+                                            }
+                                            break;
+                                    }
                                 }
                             }
                         }
