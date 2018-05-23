@@ -126,9 +126,9 @@ namespace gestureModality
             }
         }
 
-        private bool notTwoSecondsPassed(int time1, int time2)
+        private bool notXSecondsPassed(int time1, int time2)
         {
-            if (time2 - time1 <= 2)
+            if (time2 - time1 <= 1)
                 return true;
             return false;
         }
@@ -155,26 +155,26 @@ namespace gestureModality
                                     switch(g.Name)
                                     {
                                         case "ir_direita_hands_Right":
-                                            if (current_gesture == "ir_esquerda_hands_Right" && notTwoSecondsPassed(time,DateTime.Now.Second))
+                                            if (current_gesture == "ir_esquerda_hands_Right" && notXSecondsPassed(time,DateTime.Now.Second))
                                             {
                                                 Console.WriteLine("vai pra direita");
                                                 time = -1;
                                                 
                                             }
-                                            else if(!notTwoSecondsPassed(time, DateTime.Now.Second) || time == -1)
+                                            else if(!notXSecondsPassed(time, DateTime.Now.Second) || time == -1)
                                             {
                                                 time = DateTime.Now.Second;
                                                 current_gesture = g.Name;
                                             }
                                             break;
                                         case "ir_esquerda_hands_Right":
-                                            if (current_gesture == "ir_direita_hands_Right" && notTwoSecondsPassed(time, DateTime.Now.Second))
+                                            if (current_gesture == "ir_direita_hands_Right" && notXSecondsPassed(time, DateTime.Now.Second))
                                             {
                                                 Console.WriteLine("vai pra esquerda");
                                                 time = -1;
 
                                             }
-                                            else if (!notTwoSecondsPassed(time, DateTime.Now.Second) || time == -1)
+                                            else if (!notXSecondsPassed(time, DateTime.Now.Second) || time == -1)
                                             {
                                                 time = DateTime.Now.Second;
                                                 current_gesture = g.Name;
@@ -182,26 +182,26 @@ namespace gestureModality
                                             break;
 
                                         case "ir_cima":
-                                            if (current_gesture == "ir_baixo" && notTwoSecondsPassed(time, DateTime.Now.Second))
+                                            if (current_gesture == "ir_baixo" && notXSecondsPassed(time, DateTime.Now.Second))
                                             {
                                                 Console.WriteLine("Ir pra cima");
                                                 time = -1;
 
                                             }
-                                            else if (!notTwoSecondsPassed(time, DateTime.Now.Second) || time == -1)
+                                            else if (!notXSecondsPassed(time, DateTime.Now.Second) || time == -1)
                                             {
                                                 time = DateTime.Now.Second;
                                                 current_gesture = g.Name;
                                             }
                                             break;
                                         case "ir_baixo":
-                                            if (current_gesture == "ir_cima" && notTwoSecondsPassed(time, DateTime.Now.Second))
+                                            if (current_gesture == "ir_cima" && notXSecondsPassed(time, DateTime.Now.Second))
                                             {
                                                 Console.WriteLine("Ir pra baixo");
                                                 time = -1;
 
                                             }
-                                            else if (!notTwoSecondsPassed(time, DateTime.Now.Second) || time == -1)
+                                            else if (!notXSecondsPassed(time, DateTime.Now.Second) || time == -1)
                                             {
                                                 time = DateTime.Now.Second;
                                                 current_gesture = g.Name;
