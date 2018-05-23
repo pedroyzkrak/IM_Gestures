@@ -130,7 +130,6 @@ namespace gestureModality
         {
             if (time1 <= 800)
             {
-                Console.WriteLine("Tempo: "+time1);
                 return true;
             }
 
@@ -230,7 +229,7 @@ namespace gestureModality
                                                 Console.WriteLine("abrir mapa");
                                                 stopwatch.Stop();
                                             }
-                                            else if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds) || !stopwatch.IsRunning)
+                                            else if ((!notXSecondsPassed(stopwatch.Elapsed.Milliseconds) || !stopwatch.IsRunning) && current_gesture != g.Name)
                                             {
                                                 stopwatch.Start();
                                                 current_gesture = g.Name;
