@@ -146,6 +146,22 @@ namespace gestureModality
                     var discreteResults = vgbFrame.DiscreteGestureResults;
                     if (discreteResults != null)
                     {
+                        if(discreteResults.Count==0)
+                        {
+                            Console.WriteLine("resultado null");
+                            if (stopwatch.IsRunning)
+                            {
+                                if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds))
+                                {
+                                    current_gesture = "";
+                                    stopwatch.Stop();
+                                }
+                            }
+                            else
+                            {
+                                current_gesture = "";
+                            }
+                        }
                         foreach (Gesture g in vgbFrameSource.Gestures)
                         {
                             if (g.GestureType == GestureType.Discrete)
@@ -308,26 +324,6 @@ namespace gestureModality
                             }
                         }
                     }
-                }
-                else if(vgbFrame!=null)
-                {
-                    if(vgbFrame.DiscreteGestureResults.Count==0)
-                    {
-                        Console.WriteLine("resultado null");
-                        if (stopwatch.IsRunning)
-                        {
-                            if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds))
-                            {
-                                current_gesture = "";
-                                stopwatch.Stop();
-                            }
-                        }
-                        else
-                        {
-                            current_gesture = "";
-                        }
-                    }
-
                 }
             }
         }
