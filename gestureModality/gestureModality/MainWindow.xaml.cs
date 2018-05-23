@@ -70,7 +70,6 @@ namespace gestureModality
             this.kinect.IsAvailableChanged += this.Sensor_IsAvailableChanged;
             this.StatusText = this.kinect.IsAvailable ? "The Kinect is availabe." : "Kinect is Unavailable!";
             this.DataContext = this;
-
             _gm = new GestureMod();
             bodyFrameReader = kinect.BodyFrameSource.OpenReader();
             bodyFrameReader.FrameArrived += bodyFrameArrived;
@@ -129,8 +128,12 @@ namespace gestureModality
 
         private bool notXSecondsPassed(int time1)
         {
-            if (time1<=600)
+            if (time1 <= 800)
+            {
+                Console.WriteLine("Tempo: "+time1);
                 return true;
+            }
+
             return false;
         }
 
@@ -184,31 +187,31 @@ namespace gestureModality
                                             break;
 
                                         case "ir_cima":
-                                            if (current_gesture == "ir_baixo" && notXSecondsPassed(stopwatch.Elapsed.Milliseconds) && stopwatch.IsRunning)
+                                            if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds))
                                             {
-                                                Console.WriteLine("vai pra cima");
-                                                stopwatch.Stop();
-
-
-                                            }
-                                            else if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds) || !stopwatch.IsRunning)
-                                            {
-                                                stopwatch.Start();
-                                                current_gesture = g.Name;
+                                                if(!stopwatch.IsRunning)
+                                                {
+                                                    Console.WriteLine("Vai pra cima");
+                                                }
+                                                else
+                                                {
+                                                    stopwatch.Stop();
+                                                    current_gesture = "";
+                                                }
                                             }
                                             break;
                                         case "ir_baixo":
-                                            if (current_gesture == "ir_cima" && notXSecondsPassed(stopwatch.Elapsed.Milliseconds) && stopwatch.IsRunning)
+                                            if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds))
                                             {
-                                                Console.WriteLine("vai pra baixo");
-                                                stopwatch.Stop();
-
-
-                                            }
-                                            else if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds) || !stopwatch.IsRunning)
-                                            {
-                                                stopwatch.Start();
-                                                current_gesture = g.Name;
+                                                if (!stopwatch.IsRunning)
+                                                {
+                                                    Console.WriteLine("Vai pra baixo");
+                                                }
+                                                else
+                                                {
+                                                    stopwatch.Stop();
+                                                    current_gesture = "";
+                                                }
                                             }
                                             break;
                                         case "mapa_aberto":
@@ -216,8 +219,6 @@ namespace gestureModality
                                             {
                                                 Console.WriteLine("abrir mapa");
                                                 stopwatch.Stop();
-
-
                                             }
                                             else if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds) || !stopwatch.IsRunning)
                                             {
