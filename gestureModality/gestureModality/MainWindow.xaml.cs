@@ -224,29 +224,51 @@ namespace gestureModality
                                             }
                                             break;
                                         case "mapa_aberto":
-                                            if (current_gesture == "mapa_fechado" && notXSecondsPassed(stopwatch.Elapsed.Milliseconds))
+                                            if(stopwatch.IsRunning && current_gesture=="mapa_fechado")
                                             {
-                                                Console.WriteLine("abrir mapa");
-                                                stopwatch.Stop();
+                                                if(notXSecondsPassed(stopwatch.Elapsed.Milliseconds))
+                                                {
+                                                    Console.WriteLine("Abrir mapa");
+                                                    stopwatch.Stop();
+                                                    current_gesture = ""; // ????
+                                                }
+                                                else
+                                                {
+                                                    stopwatch.Stop();
+                                                    current_gesture = "";
+                                                }
                                             }
-                                            else if ((!notXSecondsPassed(stopwatch.Elapsed.Milliseconds) || !stopwatch.IsRunning) && current_gesture != g.Name)
+                                            else
                                             {
-                                                stopwatch.Start();
-                                                current_gesture = g.Name;
+                                                if(current_gesture!=g.Name)
+                                                {
+                                                    stopwatch.Start();
+                                                    current_gesture = g.Name;
+                                                }
                                             }
                                             break;
                                         case "mapa_fechado":
-                                            if (current_gesture == "mapa_aberto" && notXSecondsPassed(stopwatch.Elapsed.Milliseconds) && stopwatch.IsRunning)
+                                            if (stopwatch.IsRunning && current_gesture == "mapa_aberto")
                                             {
-                                                Console.WriteLine("fechar mapa");
-                                                stopwatch.Stop();
-
-
+                                                if (notXSecondsPassed(stopwatch.Elapsed.Milliseconds))
+                                                {
+                                                    Console.WriteLine("fechar mapa");
+                                                    stopwatch.Stop();
+                                                    current_gesture =""; // ????
+                                                }
+                                                else
+                                                {
+                                                    stopwatch.Stop();
+                                                    current_gesture = "";
+                                                }
                                             }
-                                            else if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds) || !stopwatch.IsRunning)
+                                            else
                                             {
-                                                stopwatch.Start();
-                                                current_gesture = g.Name;
+                                                if (current_gesture != g.Name)
+                                                {
+                                                    stopwatch.Start();
+                                                    current_gesture = g.Name;
+                                                }
                                             }
                                             break;
                                         case "atacar_direita_body_Right":
@@ -293,6 +315,7 @@ namespace gestureModality
                             if(!notXSecondsPassed(stopwatch.Elapsed.Milliseconds))
                             {
                                 current_gesture = "";
+                                stopwatch.Stop();
                             }
                         }
                         else
