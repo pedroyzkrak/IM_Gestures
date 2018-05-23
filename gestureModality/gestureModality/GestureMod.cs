@@ -18,7 +18,7 @@ namespace gestureModality
 
         }
 
-        private void GestureRecognized(String gestureName, float confidence)
+        public void GestureRecognized(String gestureName, float confidence)
         {
             //SEND
             // IMPORTANT TO KEEP THE FORMAT {"recognized":["SHAPE","COLOR"]}

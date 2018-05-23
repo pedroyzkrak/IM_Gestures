@@ -156,62 +156,72 @@ namespace gestureModality
 
                                 if (result != null && result.Confidence>0.5)
                                 {
-                                    Console.WriteLine("Gesto:  " + g.Name + "   Confiança: " + result.Confidence);
+                                    //Console.WriteLine("Gesto:  " + g.Name + "   Confiança: " + result.Confidence);
                                     switch(g.Name)
                                     {
-                                        case "ir_direita_hands_Right":
-                                            if (current_gesture == "ir_esquerda_hands_Right" && notXSecondsPassed(stopwatch.Elapsed.Milliseconds) && stopwatch.IsRunning)
+                                        case "ir_direita_Right":
+                                            if (stopwatch.IsRunning && current_gesture!=g.Name)
                                             {
-                                                Console.WriteLine("vai pra direita");
-                                                stopwatch.Stop();
-                                                
-                                                
+                                                if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds)) //está o timer ativo e já passaram os segundos permitidos
+                                                {
+                                                    Console.WriteLine("Vai pra direita");
+                                                    stopwatch.Stop();
+                                                    current_gesture = g.Name;
+                                                }
                                             }
-                                            else if(!notXSecondsPassed(stopwatch.Elapsed.Milliseconds) || !stopwatch.IsRunning)
+                                           else if(!stopwatch.IsRunning) // o stopwatch não está ativo
                                             {
-                                                stopwatch.Start();
+                                                Console.WriteLine("Vai pra direita");
                                                 current_gesture = g.Name;
                                             }
                                             break;
-                                        case "ir_esquerda_hands_Right":
-                                            if (current_gesture == "ir_direita_hands_Right" && notXSecondsPassed(stopwatch.Elapsed.Milliseconds) && stopwatch.IsRunning)
+                                        case "ir_esquerda_Left":
+                                            if (stopwatch.IsRunning && current_gesture != g.Name)
                                             {
-                                                Console.WriteLine("vai pra esquerda");
-                                                stopwatch.Stop();
+                                                if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds)) //está o timer ativo e já passaram os segundos permitidos
+                                                {
+                                                    Console.WriteLine("Vai pra esquerda");
+                                                    stopwatch.Stop();
+                                                    current_gesture = g.Name;
+                                                }
                                             }
-                                            else if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds) || !stopwatch.IsRunning)
+                                            else if (!stopwatch.IsRunning) // o stopwatch não está ativo
                                             {
-                                                stopwatch.Start();
+                                                Console.WriteLine("Vai pra esquerda");
                                                 current_gesture = g.Name;
                                             }
                                             break;
 
                                         case "ir_cima":
-                                            if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds))
+                                            if (stopwatch.IsRunning && current_gesture != g.Name)
                                             {
-                                                if(!stopwatch.IsRunning)
+                                                if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds)) //está o timer ativo e já passaram os segundos permitidos
                                                 {
                                                     Console.WriteLine("Vai pra cima");
-                                                }
-                                                else
-                                                {
                                                     stopwatch.Stop();
-                                                    current_gesture = "";
+                                                    current_gesture = g.Name;
                                                 }
                                             }
-                                            break;
-                                        case "ir_baixo":
-                                            if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds))
+                                            else if (!stopwatch.IsRunning) // o stopwatch não está ativo
                                             {
-                                                if (!stopwatch.IsRunning)
+                                                Console.WriteLine("Vai pra cima");
+                                                current_gesture = g.Name;
+                                            }
+                                            break;
+                                        case "ir_baixo_double":
+                                            if (stopwatch.IsRunning && current_gesture != g.Name)
+                                            {
+                                                if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds)) //está o timer ativo e já passaram os segundos permitidos
                                                 {
                                                     Console.WriteLine("Vai pra baixo");
-                                                }
-                                                else
-                                                {
                                                     stopwatch.Stop();
-                                                    current_gesture = "";
+                                                    current_gesture = g.Name;
                                                 }
+                                            }
+                                            else if (!stopwatch.IsRunning) // o stopwatch não está ativo
+                                            {
+                                                Console.WriteLine("Vai pra baixo");
+                                                current_gesture = g.Name;
                                             }
                                             break;
                                         case "mapa_aberto":
@@ -240,6 +250,38 @@ namespace gestureModality
                                                 current_gesture = g.Name;
                                             }
                                             break;
+                                        case "atacar_direita_body_Right":
+                                            if (stopwatch.IsRunning && current_gesture != g.Name)
+                                            {
+                                                if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds)) //está o timer ativo e já passaram os segundos permitidos
+                                                {
+                                                    Console.WriteLine("Ataca");
+                                                    stopwatch.Stop();
+                                                    current_gesture = g.Name;
+                                                }
+                                            }
+                                            else if (!stopwatch.IsRunning) // o stopwatch não está ativo
+                                            {
+                                                Console.WriteLine("Ataca");
+                                                current_gesture = g.Name;
+                                            }
+                                            break;
+                                        case "atacar_esquerda_body_Left":
+                                            if (stopwatch.IsRunning && current_gesture != g.Name)
+                                            {
+                                                if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds)) //está o timer ativo e já passaram os segundos permitidos
+                                                {
+                                                    Console.WriteLine("Ataca");
+                                                    stopwatch.Stop();
+                                                    current_gesture = g.Name;
+                                                }
+                                            }
+                                            else if (!stopwatch.IsRunning) // o stopwatch não está ativo
+                                            {
+                                                Console.WriteLine("Ataca");
+                                                current_gesture = g.Name;
+                                            }
+                                            break;
                                     }
                                 }
                             }
@@ -247,7 +289,7 @@ namespace gestureModality
                     }
                     else
                     {
-                        //cenas ? 
+                        current_gesture = "";
                     }
                 }
             }
