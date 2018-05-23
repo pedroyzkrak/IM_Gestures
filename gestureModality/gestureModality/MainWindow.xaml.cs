@@ -5,6 +5,7 @@ using Microsoft.Kinect.VisualGestureBuilder;
 using System;
 using System.Timers;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace gestureModality
 {
@@ -14,7 +15,7 @@ namespace gestureModality
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         private string current_gesture = "";
-        private int time = -1;
+        private Stopwatch stopwatch = new Stopwatch();
         private KinectSensor kinect = null;
 
         private string statusText = null;
@@ -126,9 +127,9 @@ namespace gestureModality
             }
         }
 
-        private bool notXSecondsPassed(int time1, int time2)
+        private bool notXSecondsPassed(int time1)
         {
-            if (time2 - time1 <= 1)
+            if (time1<=600)
                 return true;
             return false;
         }
@@ -156,81 +157,85 @@ namespace gestureModality
                                     switch(g.Name)
                                     {
                                         case "ir_direita_hands_Right":
-                                            if (current_gesture == "ir_esquerda_hands_Right" && notXSecondsPassed(time,DateTime.Now.Second) && time != -1)
+                                            if (current_gesture == "ir_esquerda_hands_Right" && notXSecondsPassed(stopwatch.Elapsed.Milliseconds) && stopwatch.IsRunning)
                                             {
                                                 Console.WriteLine("vai pra direita");
-                                                time = -1;
+                                                stopwatch.Stop();
+                                                
                                                 
                                             }
-                                            else if(!notXSecondsPassed(time, DateTime.Now.Second) || time == -1)
+                                            else if(!notXSecondsPassed(stopwatch.Elapsed.Milliseconds) || !stopwatch.IsRunning)
                                             {
-                                                time = DateTime.Now.Second;
+                                                stopwatch.Start();
                                                 current_gesture = g.Name;
                                             }
                                             break;
                                         case "ir_esquerda_hands_Right":
-                                            if (current_gesture == "ir_direita_hands_Right" && notXSecondsPassed(time, DateTime.Now.Second) && time != -1)
+                                            if (current_gesture == "ir_direita_hands_Right" && notXSecondsPassed(stopwatch.Elapsed.Milliseconds) && stopwatch.IsRunning)
                                             {
                                                 Console.WriteLine("vai pra esquerda");
-                                                time = -1;
-
+                                                stopwatch.Stop();
                                             }
-                                            else if (!notXSecondsPassed(time, DateTime.Now.Second) || time == -1)
+                                            else if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds) || !stopwatch.IsRunning)
                                             {
-                                                time = DateTime.Now.Second;
+                                                stopwatch.Start();
                                                 current_gesture = g.Name;
                                             }
                                             break;
 
                                         case "ir_cima":
-                                            if (current_gesture == "ir_baixo" && notXSecondsPassed(time, DateTime.Now.Second) && time != -1)
+                                            if (current_gesture == "ir_baixo" && notXSecondsPassed(stopwatch.Elapsed.Milliseconds) && stopwatch.IsRunning)
                                             {
-                                                Console.WriteLine("Ir pra cima");
-                                                time = -1;
+                                                Console.WriteLine("vai pra cima");
+                                                stopwatch.Stop();
+
 
                                             }
-                                            else if (!notXSecondsPassed(time, DateTime.Now.Second) || time == -1)
+                                            else if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds) || !stopwatch.IsRunning)
                                             {
-                                                time = DateTime.Now.Second;
+                                                stopwatch.Start();
                                                 current_gesture = g.Name;
                                             }
                                             break;
                                         case "ir_baixo":
-                                            if (current_gesture == "ir_cima" && notXSecondsPassed(time, DateTime.Now.Second) && time != -1)
+                                            if (current_gesture == "ir_cima" && notXSecondsPassed(stopwatch.Elapsed.Milliseconds) && stopwatch.IsRunning)
                                             {
-                                                Console.WriteLine("Ir pra baixo");
-                                                time = -1;
+                                                Console.WriteLine("vai pra baixo");
+                                                stopwatch.Stop();
+
 
                                             }
-                                            else if (!notXSecondsPassed(time, DateTime.Now.Second) || time == -1)
+                                            else if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds) || !stopwatch.IsRunning)
                                             {
-                                                time = DateTime.Now.Second;
+                                                stopwatch.Start();
                                                 current_gesture = g.Name;
                                             }
                                             break;
                                         case "mapa_aberto":
-                                            if (current_gesture == "mapa_fechado" && notXSecondsPassed(time, DateTime.Now.Second) && time != -1)
+                                            if (current_gesture == "mapa_fechado" && notXSecondsPassed(stopwatch.Elapsed.Milliseconds) && stopwatch.IsRunning)
                                             {
-                                                Console.WriteLine("Abrir mapa");
-                                                time = -1;
+                                                Console.WriteLine("abrir mapa");
+                                                stopwatch.Stop();
+
 
                                             }
-                                            else if (!notXSecondsPassed(time, DateTime.Now.Second) || time == -1 || current_gesture!="mapa_fechado")
+                                            else if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds) || !stopwatch.IsRunning)
                                             {
-                                                time = DateTime.Now.Second;
+                                                stopwatch.Start();
                                                 current_gesture = g.Name;
                                             }
                                             break;
                                         case "mapa_fechado":
-                                            if (current_gesture == "mapa_aberto" && notXSecondsPassed(time, DateTime.Now.Second) && time!=-1)
+                                            if (current_gesture == "mapa_aberto" && notXSecondsPassed(stopwatch.Elapsed.Milliseconds) && stopwatch.IsRunning)
                                             {
-                                                Console.WriteLine("Fechar Mapa");
-                                                time = -1;
+                                                Console.WriteLine("fechar mapa");
+                                                stopwatch.Stop();
+
 
                                             }
-                                            else if (!notXSecondsPassed(time, DateTime.Now.Second) || time == -1 || current_gesture != "mapa_aberto")
+                                            else if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds) || !stopwatch.IsRunning)
                                             {
-                                                time = DateTime.Now.Second;
+                                                stopwatch.Start();
                                                 current_gesture = g.Name;
                                             }
                                             break;
