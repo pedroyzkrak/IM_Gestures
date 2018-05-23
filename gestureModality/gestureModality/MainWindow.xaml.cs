@@ -169,7 +169,7 @@ namespace gestureModality
                                                     current_gesture = g.Name;
                                                 }
                                             }
-                                           else if(!stopwatch.IsRunning) // o stopwatch não está ativo
+                                           else if(!stopwatch.IsRunning && current_gesture!=g.Name) // o stopwatch não está ativo
                                             {
                                                 Console.WriteLine("Vai pra direita");
                                                 current_gesture = g.Name;
@@ -185,7 +185,7 @@ namespace gestureModality
                                                     current_gesture = g.Name;
                                                 }
                                             }
-                                            else if (!stopwatch.IsRunning) // o stopwatch não está ativo
+                                            else if (!stopwatch.IsRunning && current_gesture != g.Name) // o stopwatch não está ativo
                                             {
                                                 Console.WriteLine("Vai pra esquerda");
                                                 current_gesture = g.Name;
@@ -202,7 +202,7 @@ namespace gestureModality
                                                     current_gesture = g.Name;
                                                 }
                                             }
-                                            else if (!stopwatch.IsRunning) // o stopwatch não está ativo
+                                            else if (!stopwatch.IsRunning && current_gesture != g.Name) // o stopwatch não está ativo
                                             {
                                                 Console.WriteLine("Vai pra cima");
                                                 current_gesture = g.Name;
@@ -218,7 +218,7 @@ namespace gestureModality
                                                     current_gesture = g.Name;
                                                 }
                                             }
-                                            else if (!stopwatch.IsRunning) // o stopwatch não está ativo
+                                            else if (!stopwatch.IsRunning && current_gesture != g.Name) // o stopwatch não está ativo
                                             {
                                                 Console.WriteLine("Vai pra baixo");
                                                 current_gesture = g.Name;
@@ -260,7 +260,7 @@ namespace gestureModality
                                                     current_gesture = g.Name;
                                                 }
                                             }
-                                            else if (!stopwatch.IsRunning) // o stopwatch não está ativo
+                                            else if (!stopwatch.IsRunning && current_gesture != g.Name) // o stopwatch não está ativo
                                             {
                                                 Console.WriteLine("Ataca");
                                                 current_gesture = g.Name;
@@ -276,7 +276,7 @@ namespace gestureModality
                                                     current_gesture = g.Name;
                                                 }
                                             }
-                                            else if (!stopwatch.IsRunning) // o stopwatch não está ativo
+                                            else if (!stopwatch.IsRunning && current_gesture != g.Name) // o stopwatch não está ativo
                                             {
                                                 Console.WriteLine("Ataca");
                                                 current_gesture = g.Name;
