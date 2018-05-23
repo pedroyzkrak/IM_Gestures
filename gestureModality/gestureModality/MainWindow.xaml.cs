@@ -152,6 +152,7 @@ namespace gestureModality
 
                                 if (result != null && result.Confidence>0.5)
                                 {
+                                    Console.WriteLine("Gesto:  " + g.Name + "   Confiança: " + result.Confidence);
                                     switch(g.Name)
                                     {
                                         case "ir_direita_hands_Right":
