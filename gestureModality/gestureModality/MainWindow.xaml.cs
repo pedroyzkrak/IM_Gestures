@@ -225,7 +225,7 @@ namespace gestureModality
                                             }
                                             break;
                                         case "mapa_aberto":
-                                            if (current_gesture == "mapa_fechado" && notXSecondsPassed(stopwatch.Elapsed.Milliseconds) && stopwatch.IsRunning)
+                                            if (current_gesture == "mapa_fechado" && notXSecondsPassed(stopwatch.Elapsed.Milliseconds))
                                             {
                                                 Console.WriteLine("abrir mapa");
                                                 stopwatch.Stop();
@@ -289,7 +289,18 @@ namespace gestureModality
                     }
                     else
                     {
-                        current_gesture = "";
+                        if(stopwatch.IsRunning)
+                        {
+                            if(!notXSecondsPassed(stopwatch.Elapsed.Milliseconds))
+                            {
+                                current_gesture = "";
+                            }
+                        }
+                        else
+                        {
+                            current_gesture = "";
+                        }
+                        
                     }
                 }
             }
