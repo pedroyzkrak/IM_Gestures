@@ -18,12 +18,12 @@ namespace gestureModality
 
         }
 
-        public void GestureRecognized(String gestureName, float confidence)
+        public void GestureRecognized(String action, float confidence)
         {
             //SEND
             // IMPORTANT TO KEEP THE FORMAT {"recognized":["SHAPE","COLOR"]}
             string json = "{ \"recognized\": [";
-            json += "\"" + gestureName + "\", ";
+            json += "\"" + action + "\", ";
             json = json.Substring(0, json.Length - 2);
             json += "] }";
             Console.WriteLine(json);

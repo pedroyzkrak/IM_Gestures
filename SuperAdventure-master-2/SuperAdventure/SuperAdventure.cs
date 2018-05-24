@@ -28,7 +28,7 @@ namespace SuperAdventure
         {
             InitializeComponent();
             tts = new TTS();
-            mmiC = new MmiCommunication("localhost", 8000, "User1", "GUI");
+            mmiC = new MmiCommunication("localhost", 8000, "User2", "GUI");
             mmiC.Message += MmiC_Message;
             StartComms(mmiC);
 
@@ -205,6 +205,8 @@ namespace SuperAdventure
             var com = doc.Descendants("command").FirstOrDefault().Value;
             dynamic json = JsonConvert.DeserializeObject(com);
 
+            Console.WriteLine((string)json.recognized[0].ToString());
+
             switch ((string)json.recognized[0].ToString())
             {
                 case "MUTE":
@@ -242,7 +244,7 @@ namespace SuperAdventure
                 case "ATACAR":
                     Invoke((MethodInvoker)delegate
                     {
-                        if (_player.CurrentLocation.HasAMonster)
+                        if (_player.CurrentLocation.HasAMonster && _player.Weapons.Count != 0)
                         {
                             if (JsonArray_Length(json) == 1)
                             {
@@ -278,6 +280,10 @@ namespace SuperAdventure
                                 }
 
                             }
+                        }
+                        else if (_player.Weapons.Count == 0)
+                        {
+                            tts.Speak("Ainda não tens arma, por isso não podes atacar. Já experimentáste ir ao vendedor?");
                         }
                         else
                         {

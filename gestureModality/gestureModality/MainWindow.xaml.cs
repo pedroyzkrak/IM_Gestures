@@ -184,9 +184,8 @@ namespace gestureModality
                                     DiscreteGestureResult result = null;
                                     discreteResults.TryGetValue(g, out result);
 
-                                    if (result != null && result.Confidence > 0.5)
+                                    if (result != null && result.Confidence > 0.4)
                                     {
-                                        //Console.WriteLine("Gesto:  " + g.Name + "   Confiança: " + result.Confidence);
                                         switch (g.Name)
                                         {
                                             case "ir_direita_Right":
@@ -195,6 +194,7 @@ namespace gestureModality
                                                     if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds)) //está o timer ativo e já passaram os segundos permitidos
                                                     {
                                                         Console.WriteLine("Vai pra direita");
+                                                        _gm.GestureRecognized("MOVER\", \"DIREITA", result.Confidence);
                                                         stopwatch.Stop();
                                                         current_gesture = g.Name;
                                                     }
@@ -202,6 +202,7 @@ namespace gestureModality
                                                 else if (!stopwatch.IsRunning && current_gesture != g.Name) // o stopwatch não está ativo
                                                 {
                                                     Console.WriteLine("Vai pra direita");
+                                                    _gm.GestureRecognized("MOVER\", \"DIREITA", result.Confidence);
                                                     current_gesture = g.Name;
                                                 }
                                                 break;
@@ -211,6 +212,7 @@ namespace gestureModality
                                                     if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds)) //está o timer ativo e já passaram os segundos permitidos
                                                     {
                                                         Console.WriteLine("Vai pra esquerda");
+                                                        _gm.GestureRecognized("MOVER\", \"ESQUERDA", result.Confidence);
                                                         stopwatch.Stop();
                                                         current_gesture = g.Name;
                                                     }
@@ -218,6 +220,7 @@ namespace gestureModality
                                                 else if (!stopwatch.IsRunning && current_gesture != g.Name) // o stopwatch não está ativo
                                                 {
                                                     Console.WriteLine("Vai pra esquerda");
+                                                    _gm.GestureRecognized("MOVER\", \"ESQUERDA", result.Confidence);
                                                     current_gesture = g.Name;
                                                 }
                                                 break;
@@ -228,6 +231,7 @@ namespace gestureModality
                                                     if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds)) //está o timer ativo e já passaram os segundos permitidos
                                                     {
                                                         Console.WriteLine("Vai pra cima");
+                                                        _gm.GestureRecognized("MOVER\", \"CIMA", result.Confidence);
                                                         stopwatch.Stop();
                                                         current_gesture = g.Name;
                                                     }
@@ -235,6 +239,7 @@ namespace gestureModality
                                                 else if (!stopwatch.IsRunning && current_gesture != g.Name) // o stopwatch não está ativo
                                                 {
                                                     Console.WriteLine("Vai pra cima");
+                                                    _gm.GestureRecognized("MOVER\", \"CIMA", result.Confidence);
                                                     current_gesture = g.Name;
                                                 }
                                                 break;
@@ -244,6 +249,7 @@ namespace gestureModality
                                                     if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds)) //está o timer ativo e já passaram os segundos permitidos
                                                     {
                                                         Console.WriteLine("Vai pra baixo");
+                                                        _gm.GestureRecognized("MOVER\", \"BAIXO", result.Confidence);
                                                         stopwatch.Stop();
                                                         current_gesture = g.Name;
                                                     }
@@ -251,6 +257,7 @@ namespace gestureModality
                                                 else if (!stopwatch.IsRunning && current_gesture != g.Name) // o stopwatch não está ativo
                                                 {
                                                     Console.WriteLine("Vai pra baixo");
+                                                    _gm.GestureRecognized("MOVER\", \"BAIXO", result.Confidence);
                                                     current_gesture = g.Name;
                                                 }
                                                 break;
@@ -261,8 +268,9 @@ namespace gestureModality
                                                     {
 
                                                         Console.WriteLine("Abrir mapa");
+                                                        _gm.GestureRecognized("ABRIR\", \"MAPA", result.Confidence);
                                                         stopwatch.Stop();
-                                                        current_gesture = g.Name; // ????
+                                                        current_gesture = g.Name;
                                                     }
                                                     else
                                                     {
@@ -270,7 +278,7 @@ namespace gestureModality
                                                         current_gesture = g.Name;
                                                     }
                                                 }
-                                                else if(!stopwatch.IsRunning)
+                                                else if (!stopwatch.IsRunning)
                                                 {
                                                     if (current_gesture != g.Name)
                                                     {
@@ -286,8 +294,9 @@ namespace gestureModality
                                                     {
 
                                                         Console.WriteLine("fechar mapa");
+                                                        _gm.GestureRecognized("FECHAR\", \"MAPA", result.Confidence);
                                                         stopwatch.Stop();
-                                                        current_gesture = g.Name; // ????
+                                                        current_gesture = g.Name;
                                                     }
                                                     else
                                                     {
@@ -295,7 +304,7 @@ namespace gestureModality
                                                         current_gesture = g.Name;
                                                     }
                                                 }
-                                                else if(!stopwatch.IsRunning)
+                                                else if (!stopwatch.IsRunning)
                                                 {
                                                     if (current_gesture != g.Name)
                                                     {
@@ -310,6 +319,7 @@ namespace gestureModality
                                                     if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds)) //está o timer ativo e já passaram os segundos permitidos
                                                     {
                                                         Console.WriteLine("Ataca");
+                                                        _gm.GestureRecognized("ATACAR", result.Confidence);
                                                         stopwatch.Stop();
                                                         current_gesture = g.Name;
                                                     }
@@ -317,6 +327,7 @@ namespace gestureModality
                                                 else if (!stopwatch.IsRunning && current_gesture != g.Name) // o stopwatch não está ativo
                                                 {
                                                     Console.WriteLine("Ataca");
+                                                    _gm.GestureRecognized("ATACAR", result.Confidence);
                                                     current_gesture = g.Name;
                                                 }
                                                 break;
@@ -326,6 +337,7 @@ namespace gestureModality
                                                     if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds)) //está o timer ativo e já passaram os segundos permitidos
                                                     {
                                                         Console.WriteLine("Ataca");
+                                                        _gm.GestureRecognized("ATACAR", result.Confidence);
                                                         stopwatch.Stop();
                                                         current_gesture = g.Name;
                                                     }
@@ -333,6 +345,7 @@ namespace gestureModality
                                                 else if (!stopwatch.IsRunning && current_gesture != g.Name) // o stopwatch não está ativo
                                                 {
                                                     Console.WriteLine("Ataca");
+                                                    _gm.GestureRecognized("ATACAR", result.Confidence);
                                                     current_gesture = g.Name;
                                                 }
                                                 break;
@@ -347,5 +360,4 @@ namespace gestureModality
             }
         }
     }
-
-    }
+}
