@@ -20,6 +20,7 @@ namespace gestureModality
         private KinectSensor kinect = null;
 
         private string statusText = null;
+        private string gestureText = null;
 
         private GestureMod _gm;
         private VisualGestureBuilderDatabase vgbDb;
@@ -36,7 +37,7 @@ namespace gestureModality
 
         private void Sensor_IsAvailableChanged(object sender, IsAvailableChangedEventArgs e)
         {
-            this.StatusText = this.kinect.IsAvailable ? "The Kinect is availabe." : "Kinect is Unavailable!";
+            this.StatusText = this.kinect.IsAvailable ? "A Kinect está ativa." : "A Kinect está desativada!";
         }
         public string StatusText
         {
@@ -56,6 +57,24 @@ namespace gestureModality
                 }
             }
         }
+        public string GestureText
+        {
+            get
+            {
+                return this.gestureText;
+            }
+            set
+            {
+                if (this.gestureText != value)
+                {
+                    this.gestureText = value;
+                    if (PropertyChanged != null)
+                    {
+                        this.PropertyChanged(this, new PropertyChangedEventArgs("GestureText"));
+                    }
+                }
+            }
+        }
         private void MainWindow_Closing(object sender, CancelEventArgs e)
         {
             if (this.kinect != null)
@@ -69,7 +88,8 @@ namespace gestureModality
         {
             this.kinect = KinectSensor.GetDefault();
             this.kinect.IsAvailableChanged += this.Sensor_IsAvailableChanged;
-            this.StatusText = this.kinect.IsAvailable ? "The Kinect is availabe." : "Kinect is Unavailable!";
+            this.StatusText = this.kinect.IsAvailable ? "A Kinect está ativa." : "A Kinect está desativada!";
+            this.GestureText = "Nenhum gesto detetado.";
             this.DataContext = this;
             _gm = new GestureMod();
             bodyFrameReader = kinect.BodyFrameSource.OpenReader();
@@ -174,6 +194,7 @@ namespace gestureModality
                             {
                                 current_gesture = "";
                             }
+                            this.GestureText = "Nenhum gesto detetado";
                         }
                         else
                         {
@@ -197,6 +218,7 @@ namespace gestureModality
                                                         _gm.GestureRecognized("MOVER\", \"DIREITA", result.Confidence);
                                                         stopwatch.Stop();
                                                         current_gesture = g.Name;
+                                                        this.GestureText = "Ir para a direita, Confiança: " + result.Confidence;
                                                     }
                                                 }
                                                 else if (!stopwatch.IsRunning && current_gesture != g.Name) // o stopwatch não está ativo
@@ -204,6 +226,7 @@ namespace gestureModality
                                                     Console.WriteLine("Vai pra direita");
                                                     _gm.GestureRecognized("MOVER\", \"DIREITA", result.Confidence);
                                                     current_gesture = g.Name;
+                                                    this.GestureText = "Ir para a direita, Confiança: " + result.Confidence;
                                                 }
                                                 break;
                                             case "ir_esquerda_Left":
@@ -215,6 +238,7 @@ namespace gestureModality
                                                         _gm.GestureRecognized("MOVER\", \"ESQUERDA", result.Confidence);
                                                         stopwatch.Stop();
                                                         current_gesture = g.Name;
+                                                        this.GestureText = "Ir para a esquerda, Confiança: " + result.Confidence;
                                                     }
                                                 }
                                                 else if (!stopwatch.IsRunning && current_gesture != g.Name) // o stopwatch não está ativo
@@ -222,6 +246,7 @@ namespace gestureModality
                                                     Console.WriteLine("Vai pra esquerda");
                                                     _gm.GestureRecognized("MOVER\", \"ESQUERDA", result.Confidence);
                                                     current_gesture = g.Name;
+                                                    this.GestureText = "Ir para a esquerda, Confiança: " + result.Confidence;
                                                 }
                                                 break;
 
@@ -234,6 +259,7 @@ namespace gestureModality
                                                         _gm.GestureRecognized("MOVER\", \"CIMA", result.Confidence);
                                                         stopwatch.Stop();
                                                         current_gesture = g.Name;
+                                                        this.GestureText = "Ir para cima, Confiança: " + result.Confidence;
                                                     }
                                                 }
                                                 else if (!stopwatch.IsRunning && current_gesture != g.Name) // o stopwatch não está ativo
@@ -241,6 +267,7 @@ namespace gestureModality
                                                     Console.WriteLine("Vai pra cima");
                                                     _gm.GestureRecognized("MOVER\", \"CIMA", result.Confidence);
                                                     current_gesture = g.Name;
+                                                    this.GestureText = "Ir para cima, Confiança: " + result.Confidence;
                                                 }
                                                 break;
                                             case "ir_baixo_double":
@@ -253,6 +280,7 @@ namespace gestureModality
                                                         _gm.GestureRecognized("MOVER\", \"BAIXO", result.Confidence);
                                                         stopwatch.Stop();
                                                         current_gesture = g.Name;
+                                                        this.GestureText = "Ir para baixo, Confiança: " + result.Confidence;
                                                     }
                                                 }
                                                 else if (!stopwatch.IsRunning && current_gesture != g.Name) // o stopwatch não está ativo
@@ -260,6 +288,7 @@ namespace gestureModality
                                                     Console.WriteLine("2Vai pra baixo, " + current_gesture);
                                                     _gm.GestureRecognized("MOVER\", \"BAIXO", result.Confidence);
                                                     current_gesture = g.Name;
+                                                    this.GestureText = "Ir para baixo, Confiança: " + result.Confidence;
                                                 }
                                                 break;
                                             case "mapa_aberto":
@@ -272,6 +301,7 @@ namespace gestureModality
                                                         _gm.GestureRecognized("ABRIR\", \"MAPA", result.Confidence);
                                                         stopwatch.Stop();
                                                         current_gesture = g.Name;
+                                                        this.GestureText = "Abrir mapa, Confiança: " + result.Confidence;
                                                     }
                                                     else
                                                     {
@@ -298,6 +328,7 @@ namespace gestureModality
                                                         _gm.GestureRecognized("FECHAR\", \"MAPA", result.Confidence);
                                                         stopwatch.Stop();
                                                         current_gesture = g.Name;
+                                                        this.GestureText = "Fechar mapa, Confiança: " + result.Confidence;
                                                     }
                                                     else
                                                     {
@@ -323,6 +354,7 @@ namespace gestureModality
                                                         _gm.GestureRecognized("ATACAR", result.Confidence);
                                                         stopwatch.Stop();
                                                         current_gesture = g.Name;
+                                                        this.GestureText = "Atacar, Confiança: " + result.Confidence;
                                                     }
                                                 }
                                                 else if (!stopwatch.IsRunning && current_gesture != g.Name) // o stopwatch não está ativo
@@ -330,6 +362,7 @@ namespace gestureModality
                                                     Console.WriteLine("Ataca");
                                                     _gm.GestureRecognized("ATACAR", result.Confidence);
                                                     current_gesture = g.Name;
+                                                    this.GestureText = "Atacar, Confiança: " + result.Confidence;
                                                 }
                                                 break;
                                             case "atacar_esquerda_body_Left":
@@ -341,6 +374,7 @@ namespace gestureModality
                                                         _gm.GestureRecognized("ATACAR", result.Confidence);
                                                         stopwatch.Stop();
                                                         current_gesture = g.Name;
+                                                        this.GestureText = "Atacar, Confiança: " + result.Confidence;
                                                     }
                                                 }
                                                 else if (!stopwatch.IsRunning && current_gesture != g.Name) // o stopwatch não está ativo
@@ -348,6 +382,7 @@ namespace gestureModality
                                                     Console.WriteLine("Ataca");
                                                     _gm.GestureRecognized("ATACAR", result.Confidence);
                                                     current_gesture = g.Name;
+                                                    this.GestureText = "Atacar, Confiança: " + result.Confidence;
                                                 }
                                                 break;
                                         }

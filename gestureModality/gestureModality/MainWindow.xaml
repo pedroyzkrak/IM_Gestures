@@ -5,9 +5,10 @@
      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
      xmlns:local="clr-namespace:gestureModality"
      mc:Ignorable="d"
-     Title="MainWindow" Height="350" Width="525"
+     Title="MainWindow" Height="350" Width="660"
      Closing="MainWindow_Closing" Loaded="Window_Loaded">
     <Grid>
         <TextBlock x:Name="textBlock" Text="{Binding StatusText}" HorizontalAlignment="Left" Margin="100,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="36"/>
+        <TextBlock x:Name="textBlock1" Text="{Binding GestureText}" HorizontalAlignment="Left" Margin="100,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="24"/>
     </Grid>
 </Window>
