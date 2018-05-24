@@ -6,6 +6,7 @@ using System;
 using System.Timers;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace gestureModality
 {
@@ -136,9 +137,22 @@ namespace gestureModality
             return false;
         }
 
+        private bool AtLeastOneDetected(IReadOnlyDictionary<Gesture, DiscreteGestureResult> d)
+        {
+            foreach (DiscreteGestureResult g in d.Values)
+            {
+                if (g.Detected)
+                {
+                    return true;
+                }
+            }
+            return false;
+
+        }
+
         private void vgbFrameArrived(object sender, VisualGestureBuilderFrameArrivedEventArgs e)
         {
-            
+
             using (var vgbFrame = e.FrameReference.AcquireFrame())
             {
                 if (vgbFrame != null && vgbFrame.DiscreteGestureResults != null)
@@ -146,7 +160,7 @@ namespace gestureModality
                     var discreteResults = vgbFrame.DiscreteGestureResults;
                     if (discreteResults != null)
                     {
-                        if(discreteResults.Count==0)
+                        if (!AtLeastOneDetected(discreteResults))
                         {
                             Console.WriteLine("resultado null");
                             if (stopwatch.IsRunning)
@@ -162,6 +176,9 @@ namespace gestureModality
                                 current_gesture = "";
                             }
                         }
+                    }
+                    else
+                    {
                         foreach (Gesture g in vgbFrameSource.Gestures)
                         {
                             if (g.GestureType == GestureType.Discrete)
@@ -169,13 +186,13 @@ namespace gestureModality
                                 DiscreteGestureResult result = null;
                                 discreteResults.TryGetValue(g, out result);
 
-                                if (result != null && result.Confidence>0.5)
+                                if (result != null && result.Confidence > 0.5)
                                 {
                                     //Console.WriteLine("Gesto:  " + g.Name + "   Confiança: " + result.Confidence);
-                                    switch(g.Name)
+                                    switch (g.Name)
                                     {
                                         case "ir_direita_Right":
-                                            if (stopwatch.IsRunning && current_gesture!=g.Name)
+                                            if (stopwatch.IsRunning && current_gesture != g.Name)
                                             {
                                                 if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds)) //está o timer ativo e já passaram os segundos permitidos
                                                 {
@@ -184,7 +201,7 @@ namespace gestureModality
                                                     current_gesture = g.Name;
                                                 }
                                             }
-                                           else if(!stopwatch.IsRunning && current_gesture!=g.Name) // o stopwatch não está ativo
+                                            else if (!stopwatch.IsRunning && current_gesture != g.Name) // o stopwatch não está ativo
                                             {
                                                 Console.WriteLine("Vai pra direita");
                                                 current_gesture = g.Name;
@@ -240,9 +257,9 @@ namespace gestureModality
                                             }
                                             break;
                                         case "mapa_aberto":
-                                            if(stopwatch.IsRunning && current_gesture=="mapa_fechado")
+                                            if (stopwatch.IsRunning && current_gesture == "mapa_fechado")
                                             {
-                                                if(notXSecondsPassed(stopwatch.Elapsed.Milliseconds))
+                                                if (notXSecondsPassed(stopwatch.Elapsed.Milliseconds))
                                                 {
                                                     Console.WriteLine("Abrir mapa");
                                                     stopwatch.Stop();
@@ -256,7 +273,7 @@ namespace gestureModality
                                             }
                                             else
                                             {
-                                                if(current_gesture!=g.Name)
+                                                if (current_gesture != g.Name)
                                                 {
                                                     stopwatch.Start();
                                                     current_gesture = g.Name;
@@ -270,7 +287,7 @@ namespace gestureModality
                                                 {
                                                     Console.WriteLine("fechar mapa");
                                                     stopwatch.Stop();
-                                                    current_gesture =""; // ????
+                                                    current_gesture = ""; // ????
                                                 }
                                                 else
                                                 {
@@ -324,9 +341,10 @@ namespace gestureModality
                             }
                         }
                     }
+                    
                 }
             }
         }
-
     }
+
 }
