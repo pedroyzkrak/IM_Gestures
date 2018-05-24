@@ -162,7 +162,6 @@ namespace gestureModality
                     {
                         if (!AtLeastOneDetected(discreteResults))
                         {
-                            Console.WriteLine("resultado null");
                             if (stopwatch.IsRunning)
                             {
                                 if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds))
@@ -267,6 +266,10 @@ namespace gestureModality
                                                             current_gesture = g.Name; // ????
                                                         }
 
+
+                                                        Console.WriteLine("Abrir mapa");
+                                                        stopwatch.Stop();
+                                                        current_gesture = ""; // ????
                                                     }
                                                     else
                                                     {
@@ -288,12 +291,17 @@ namespace gestureModality
                                                 {
                                                     if (notXSecondsPassed(stopwatch.Elapsed.Milliseconds))
                                                     {
+
                                                         if (current_gesture != g.Name)
                                                         {
                                                             Console.WriteLine("fechar mapa");
                                                             stopwatch.Stop();
                                                             current_gesture = g.Name; // ????
                                                         }
+
+                                                        Console.WriteLine("fechar mapa");
+                                                        stopwatch.Stop();
+                                                        current_gesture = ""; // ????
                                                     }
                                                     else
                                                     {
