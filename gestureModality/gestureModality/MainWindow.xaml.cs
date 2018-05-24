@@ -129,7 +129,7 @@ namespace gestureModality
 
         private bool notXSecondsPassed(int time1)
         {
-            if (time1 <= 800)
+            if (time1 <= 900)
             {
                 return true;
             }
@@ -184,7 +184,7 @@ namespace gestureModality
                                     DiscreteGestureResult result = null;
                                     discreteResults.TryGetValue(g, out result);
 
-                                    if (result != null && result.Confidence > 0.4)
+                                    if (result != null && result.Confidence > 0.45)
                                     {
                                         switch (g.Name)
                                         {
@@ -246,9 +246,10 @@ namespace gestureModality
                                             case "ir_baixo_double":
                                                 if (stopwatch.IsRunning && current_gesture != g.Name)
                                                 {
+                                                    Console.WriteLine(current_gesture);
                                                     if (!notXSecondsPassed(stopwatch.Elapsed.Milliseconds)) //está o timer ativo e já passaram os segundos permitidos
                                                     {
-                                                        Console.WriteLine("Vai pra baixo");
+                                                        Console.WriteLine("1Vai pra baixo");
                                                         _gm.GestureRecognized("MOVER\", \"BAIXO", result.Confidence);
                                                         stopwatch.Stop();
                                                         current_gesture = g.Name;
@@ -256,7 +257,7 @@ namespace gestureModality
                                                 }
                                                 else if (!stopwatch.IsRunning && current_gesture != g.Name) // o stopwatch não está ativo
                                                 {
-                                                    Console.WriteLine("Vai pra baixo");
+                                                    Console.WriteLine("2Vai pra baixo, " + current_gesture);
                                                     _gm.GestureRecognized("MOVER\", \"BAIXO", result.Confidence);
                                                     current_gesture = g.Name;
                                                 }
