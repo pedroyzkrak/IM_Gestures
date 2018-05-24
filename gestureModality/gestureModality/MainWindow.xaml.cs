@@ -259,20 +259,18 @@ namespace gestureModality
                                                 {
                                                     if (notXSecondsPassed(stopwatch.Elapsed.Milliseconds))
                                                     {
-                                                        if(current_gesture!=g.Name)
-                                                        {
-                                                            Console.WriteLine("Abrir mapa");
-                                                            stopwatch.Stop();
-                                                            current_gesture = g.Name; // ????
-                                                        }
+
+                                                        Console.WriteLine("Abrir mapa");
+                                                        stopwatch.Stop();
+                                                        current_gesture = g.Name; // ????
                                                     }
                                                     else
                                                     {
                                                         stopwatch.Stop();
-                                                        current_gesture = "";
+                                                        current_gesture = g.Name;
                                                     }
                                                 }
-                                                else
+                                                else if(!stopwatch.IsRunning)
                                                 {
                                                     if (current_gesture != g.Name)
                                                     {
@@ -287,20 +285,17 @@ namespace gestureModality
                                                     if (notXSecondsPassed(stopwatch.Elapsed.Milliseconds))
                                                     {
 
-                                                        if (current_gesture != g.Name)
-                                                        {
-                                                            Console.WriteLine("fechar mapa");
-                                                            stopwatch.Stop();
-                                                            current_gesture = g.Name; // ????
-                                                        }
+                                                        Console.WriteLine("fechar mapa");
+                                                        stopwatch.Stop();
+                                                        current_gesture = g.Name; // ????
                                                     }
                                                     else
                                                     {
                                                         stopwatch.Stop();
-                                                        current_gesture = "";
+                                                        current_gesture = g.Name;
                                                     }
                                                 }
-                                                else
+                                                else if(!stopwatch.IsRunning)
                                                 {
                                                     if (current_gesture != g.Name)
                                                     {
