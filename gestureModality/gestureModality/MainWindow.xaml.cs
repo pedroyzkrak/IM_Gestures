@@ -129,7 +129,7 @@ namespace gestureModality
 
         private bool notXSecondsPassed(int time1)
         {
-            if (time1 <= 900)
+            if (time1 <= 950)
             {
                 return true;
             }
@@ -184,7 +184,7 @@ namespace gestureModality
                                     DiscreteGestureResult result = null;
                                     discreteResults.TryGetValue(g, out result);
 
-                                    if (result != null && result.Confidence > 0.45)
+                                    if (result != null && result.Confidence > 0.4)
                                     {
                                         switch (g.Name)
                                         {
