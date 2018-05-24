@@ -265,11 +265,6 @@ namespace gestureModality
                                                             stopwatch.Stop();
                                                             current_gesture = g.Name; // ????
                                                         }
-
-
-                                                        Console.WriteLine("Abrir mapa");
-                                                        stopwatch.Stop();
-                                                        current_gesture = ""; // ????
                                                     }
                                                     else
                                                     {
@@ -298,10 +293,6 @@ namespace gestureModality
                                                             stopwatch.Stop();
                                                             current_gesture = g.Name; // ????
                                                         }
-
-                                                        Console.WriteLine("fechar mapa");
-                                                        stopwatch.Stop();
-                                                        current_gesture = ""; // ????
                                                     }
                                                     else
                                                     {
